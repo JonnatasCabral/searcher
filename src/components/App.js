@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import SearchField from '../containers/fetchSearchField'
+import SearchField from './searchForm'
 
 
 const App = () => (
