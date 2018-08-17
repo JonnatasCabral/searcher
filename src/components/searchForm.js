@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 class SearchField extends Component {
 	constructor(props){
 		super(props);
+		this.state = { value: ''};
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
 	handleChange(event, state, ownProps) {
-		debugger
 		this.setState({value: event.target.value});
 	}
 
@@ -29,4 +33,8 @@ class SearchField extends Component {
 	
 }
 
-export default SearchField;
+const mapDispatchToProps = (dispatch) => ({
+	fetch_queryset: () => dispatch()
+})
+
+export default connect(null, mapDispatchToProps)(SearchField);
