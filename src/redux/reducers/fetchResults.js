@@ -1,11 +1,11 @@
-const results = (state = [], action) => {
+const result = (state = {}, action) => {
   switch (action.type) {
-    case 'FETCH_DATA':
-      return [ 'item', 'item1' ]
+    case 'FETCH_QUERYSET':
+      return {data: action.data}
     
     default:
       return state
   }
 }
 
-export default results
+export default result

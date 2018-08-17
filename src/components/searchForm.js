@@ -1,40 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import fetchQuerySet from '../apis/elasticsearch'
+
 
 class SearchField extends Component {
 	constructor(props){
 		super(props);
 		this.state = { value: ''};
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.fetchQuery = this.fetchQuery.bind(this);
 	}
 
 	handleChange(event, state, ownProps) {
 		this.setState({value: event.target.value});
 	}
 
-	handleSubmit(event, state, ownProps){
+	fetchQuery(event, state, ownProps){
 	  alert('A name was submitted: ' + this.state.value);
-	  event.preventDefault();
+	  // event.preventDefault();
+	  this.props.fetchQuerySet()
 	}
 
 	render(){
 		return(
-
-			<form onSubmit={ this.handleSubmit }>
+			<div>
 		    <label>
 		      Name:
 		      <input type="text" onChange={this.handleChange} />
 		    </label>
-		    <input type="submit" value="Submit" />
-  		</form>
+		    <input type='submit' onClick={ this.fetchQuery } value="Submit" />
+		    <div>{this.props.stateServer ? this.props.stateServer.cluster_name :''}</div>
+			</div>
 		)
 	}
 	
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	fetch_queryset: () => dispatch()
+	fetchQuerySet: () => dispatch(fetchQuerySet())
 })
 
-export default connect(null, mapDispatchToProps)(SearchField);
+const mapStateToProps = (state) => {
+	return {
+		stateServer: state.result.data
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SearchField);

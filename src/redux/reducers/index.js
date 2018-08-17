@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import results from './fetchResults'
+import result from './fetchResults'
 
 const storeApp = combineReducers({
-	'test': results
+	'result': result
 })
 
 export default storeApp;
